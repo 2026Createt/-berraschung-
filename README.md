@@ -1,1 +1,272 @@
 
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Für dich 💕</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Poppins für UI & Caveat für den handschriftlichen Brief -->
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+        .handwriting {
+            font-family: 'Caveat', cursive;
+        }
+        /* Hintergrund-Animation für schwebende Herzen */
+        @keyframes floatUp {
+            0% {
+                transform: translateY(100vh) scale(0.5);
+                opacity: 0;
+            }
+            20% {
+                opacity: 0.8;
+            }
+            100% {
+                transform: translateY(-10vh) scale(1.2);
+                opacity: 0;
+            }
+        }
+        .floating-heart {
+            position: absolute;
+            bottom: -20px;
+            color: rgba(236, 72, 153, 0.3);
+            animation: floatUp 6s infinite linear;
+            user-select: none;
+            pointer-events: none;
+        }
+        /* Brief-Entfaltungs-Animation */
+        @keyframes unfold {
+            0% {
+                transform: scale(0.8) rotateX(20deg);
+                opacity: 0;
+            }
+            100% {
+                transform: scale(1) rotateX(0deg);
+                opacity: 1;
+            }
+        }
+        .letter-container {
+            animation: unfold 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+        /* Briefpapier Textur/Effekt */
+        .parchment {
+            background: linear-gradient(135deg, #fffcf9 0%, #fff5ee 100%);
+            box-shadow: 0 20px 40px -15px rgba(225, 29, 72, 0.2), 0 0 15px rgba(0,0,0,0.05);
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-pink-100 via-rose-100 to-pink-200 min-h-screen flex items-center justify-center p-4 relative overflow-hidden">
+
+    <!-- Schwebende Herzen im Hintergrund -->
+    <div id="hearts-container" class="absolute inset-0 overflow-hidden pointer-events-none z-0"></div>
+
+    <!-- Hauptwrapper -->
+    <main class="relative z-10 w-full max-w-lg mx-auto text-center">
+
+        <!-- SCHRITT 1: Start-Screen mit Pulsierendem Herz-Button -->
+        <div id="screen-start" class="transition-all duration-700 transform opacity-100 scale-100">
+            <div class="parchment p-8 sm:p-12 rounded-3xl border border-pink-200 backdrop-blur-sm">
+                <div class="inline-block p-4 bg-pink-100 rounded-full text-pink-500 mb-6 shadow-inner animate-pulse">
+                    <svg class="w-12 h-12" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                    </svg>
+                </div>
+                <h1 class="text-3xl sm:text-4xl font-semibold text-gray-800 mb-3">Hey du... 💕</h1>
+                <p class="text-gray-600 text-base sm:text-lg mb-8">Ich habe da etwas ganz Besonderes für dich vorbereitet. Bist du bereit?</p>
+                <button onclick="openLetter()" class="w-full sm:w-auto px-8 py-4 bg-gradient-to-r from-rose-500 to-pink-500 text-white font-medium text-lg rounded-full shadow-lg hover:shadow-xl hover:scale-105 active:scale-95 transition-all duration-300 flex items-center justify-center gap-3 mx-auto">
+                    <span>Brief öffnen</span>
+                    <span class="text-2xl">💌</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- SCHRITT 2: Der Brief (Anfangs versteckt) -->
+        <div id="screen-letter" class="hidden letter-container transition-all duration-700">
+            <div class="parchment p-8 sm:p-12 rounded-3xl border border-pink-200 text-left relative">
+                
+                <!-- Briefmarken-Deko -->
+                <div class="absolute top-4 right-4 w-12 h-16 border-2 border-dashed border-rose-300 rounded flex items-center justify-center text-rose-400 transform rotate-6 bg-white/50 shadow-sm">
+                    <span class="text-2xl">💖</span>
+                </div>
+
+                <!-- Inhalt Schritt 1: Romantische Worte -->
+                <div id="letter-page-1" class="space-y-6">
+                    <h2 class="handwriting text-3xl sm:text-4xl text-rose-600 font-bold border-b border-rose-200 pb-2">Meine liebe...</h2>
+                    
+                    <div class="handwriting text-2xl sm:text-3xl text-gray-700 leading-relaxed space-y-4">
+                        <p>Du weißt ja, dass ich absolute Leidenschaft fürs Programmieren habe...</p>
+                        <p>Aber weil du so unglaublich viel in meinem Leben bedeutet, wollte ich dir zeigen, dass Code auch Gefühle transportieren kann. Jede Zeile hier habe ich nur für dich geschrieben.</p>
+                        <p>Du bringst so viel Licht, Lachen und Wärme in meine Tage, wie niemand sonst.</p>
+                    </div>
+
+                    <div class="pt-6 flex justify-end">
+                        <button onclick="goToPage2()" class="px-6 py-3 bg-rose-500 hover:bg-rose-600 text-white handwriting text-2xl rounded-2xl shadow-md hover:scale-105 transition-all flex items-center gap-2">
+                            <span>Weiter</span>
+                            <span>➔</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Inhalt Schritt 2: Die Frage (Anfangs versteckt) -->
+                <div id="letter-page-2" class="hidden space-y-6">
+                    <h2 class="handwriting text-3xl sm:text-4xl text-rose-600 font-bold border-b border-rose-200 pb-2">Und genau deshalb...</h2>
+                    
+                    <div class="handwriting text-3xl sm:text-4xl text-gray-800 leading-relaxed text-center py-6">
+                        <p class="mb-4">...möchte ich dich etwas fragen:</p>
+                        <p class="text-rose-600 font-bold text-4xl sm:text-5xl animate-pulse">Willst du meine Freundin sein? 💕</p>
+                    </div>
+
+                    <div id="button-container" class="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
+                        <button onclick="sayYes()" class="w-full sm:w-auto px-8 py-3 bg-emerald-500 hover:bg-emerald-600 text-white font-semibold text-xl rounded-2xl shadow-lg hover:scale-105 transition-all">
+                            Ja ❤️
+                        </button>
+                        <button id="btn-no" onclick="sayNo()" class="w-full sm:w-auto px-8 py-3 bg-rose-200 hover:bg-rose-300 text-rose-800 font-semibold text-xl rounded-2xl shadow transition-all">
+                            Nein 🙈
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Inhalt Schritt 3A: Ja-Reaktion (Erfolg) -->
+                <div id="letter-success" class="hidden text-center space-y-6 py-6">
+                    <div class="text-6xl animate-bounce">🥰🎉</div>
+                    <h2 class="handwriting text-4xl sm:text-5xl text-rose-600 font-bold">Yay, endlich!</h2>
+                    <p class="handwriting text-2xl sm:text-3xl text-gray-700 leading-relaxed">
+                        Ich bin so glücklich! Du machst mich zum glücklichsten Menschen auf der Welt. Ich liebe dich! ❤️
+                    </p>
+                    <div class="pt-4">
+                        <span class="inline-block px-6 py-2 bg-pink-100 text-rose-600 handwriting text-2xl rounded-full border border-pink-300">
+                            Forever & Always ✨
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Inhalt Schritt 3B: Nein-Reaktion (Frech & Humorvoll) -->
+                <div id="letter-no-response" class="hidden text-center space-y-6 py-6">
+                    <div class="text-6xl">🤨😂</div>
+                    <h2 class="handwriting text-4xl sm:text-5xl text-rose-700 font-bold">Willst du mich verarschen?</h2>
+                    <p class="handwriting text-2xl sm:text-3xl text-gray-700 leading-relaxed">
+                        Du musst trotzdem! 🤭 Es gibt hier keinen Ausweg mehr. Drück einfach den richtigen Button! 💕
+                    </p>
+                    <div class="pt-4">
+                        <button onclick="resetToQuestion()" class="px-8 py-3 bg-rose-500 hover:bg-rose-600 text-white handwriting text-2xl rounded-2xl shadow-md hover:scale-105 transition-all">
+                            Okay 💕 (Nochmal überlegen)
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </main>
+
+    <!-- JavaScript Interaktivität & Animationen -->
+    <script>
+        // Schwebende Herzen im Hintergrund generieren
+        function createFloatingHearts() {
+            const container = document.getElementById('hearts-container');
+            const emojis = ['❤️', '💖', '💕', '💗', '✨', '🌸'];
+            
+            setInterval(() => {
+                const heart = document.createElement('div');
+                heart.className = 'floating-heart handwriting';
+                heart.style.left = Math.random() * 100 + 'vw';
+                heart.style.fontSize = (Math.random() * 20 + 15) + 'px';
+                heart.style.animationDuration = (Math.random() * 3 + 4) + 's';
+                heart.innerText = emojis[Math.floor(Math.random() * emojis.length)];
+                container.appendChild(heart);
+
+                setTimeout(() => {
+                    heart.remove();
+                }, 7000);
+            }, 400);
+        }
+
+        // Starte Hintergrundherzen beim Laden
+        window.onload = function() {
+            createFloatingHearts();
+        };
+
+        // Brief öffnen
+        function openLetter() {
+            const startScreen = document.getElementById('screen-start');
+            const letterScreen = document.getElementById('screen-letter');
+            
+            startScreen.classList.add('opacity-0', 'scale-95');
+            setTimeout(() => {
+                startScreen.classList.add('hidden');
+                letterScreen.classList.remove('hidden');
+            }, 300);
+        }
+
+        // Weiter zu Seite 2 (Die Frage)
+        function goToPage2() {
+            const page1 = document.getElementById('letter-page-1');
+            const page2 = document.getElementById('letter-page-2');
+
+            page1.classList.add('opacity-0');
+            setTimeout(() => {
+                page1.classList.add('hidden');
+                page2.classList.remove('hidden');
+            }, 300);
+        }
+
+        // Klick auf "Ja"
+        function sayYes() {
+            const page2 = document.getElementById('letter-page-2');
+            const success = document.getElementById('letter-success');
+
+            page2.classList.add('opacity-0');
+            setTimeout(() => {
+                page2.classList.add('hidden');
+                success.classList.remove('hidden');
+                triggerConfetti();
+            }, 300);
+        }
+
+        // Klick auf "Nein" (Freche Antwort)
+        function sayNo() {
+            const page2 = document.getElementById('letter-page-2');
+            const noResponse = document.getElementById('letter-no-response');
+
+            page2.classList.add('opacity-0');
+            setTimeout(() => {
+                page2.classList.add('hidden');
+                noResponse.classList.remove('hidden');
+            }, 300);
+        }
+
+        // Zurück zur Frage vom Nein-Bildschirm
+        function resetToQuestion() {
+            const noResponse = document.getElementById('letter-no-response');
+            const page2 = document.getElementById('letter-page-2');
+
+            noResponse.classList.add('opacity-0');
+            setTimeout(() => {
+                noResponse.classList.add('hidden');
+                page2.classList.remove('hidden');
+                page2.classList.remove('opacity-0');
+            }, 300);
+        }
+
+        // Einfacher Konfetti/Herz-Regen Effekt bei "Ja"
+        function triggerConfetti() {
+            const container = document.getElementById('hearts-container');
+            for (let i = 0; i < 40; i++) {
+                setTimeout(() => {
+                    const confetti = document.createElement('div');
+                    confetti.className = 'absolute text-3xl animate-ping';
+                    confetti.style.left = Math.random() * 100 + 'vw';
+                    confetti.style.top = Math.random() * 80 + 'vh';
+                    confetti.innerText = ['💖', '🎉', '🥰', '✨'][Math.floor(Math.random() * 4)];
+                    container.appendChild(confetti);
+                    setTimeout(() => confetti.remove(), 1500);
+                }, i * 50);
+            }
+        }
+    </script>
+</body>
+</html>
+```
